@@ -1,0 +1,56 @@
+{
+    "name": "@pva_dluznicek/server",
+    "version": "0.0.1",
+    "private": true,
+    "author": "Jan Komínek",
+    "keywords": [
+        "server"
+    ],
+    "scripts": {
+        "upd": "pnpm update && pnpm upgrade && pnpm install",
+        "upd:f": "pnpm update --force && pnpm upgrade --force && pnpm install --force",
+        "build": "tsc",
+        "start": "node build/index.js",
+        "prod": "pnpm install && pnpm run build && pnpm run start",
+        "dev": "nodemon --exec ts-node --esm src/index.ts",
+        "format": "prettier --plugin-search-dir . --write .",
+        "lint": "prettier --plugin-search-dir . --check . && eslint . --fix",
+        "precommit": "prettier --plugin-search-dir . --write . && prettier --plugin-search-dir . --check . && eslint . --fix"
+    },
+    "dependencies": {
+        "@fastify/compress": "^6.5.0",
+        "@fastify/cors": "^8.4.1",
+        "@fastify/csrf-protection": "^6.4.0",
+        "@fastify/helmet": "^11.1.1",
+        "@fastify/middie": "^8.3.0",
+        "@fastify/rate-limit": "^8.0.3",
+        "argon2": "^0.30.3",
+        "dotenv": "^16.3.1",
+        "fastify": "^4.24.3",
+        "joi": "^17.11.0",
+        "jose": "^4.15.4",
+        "mongodb": "^5.9.1",
+        "mongoose": "^7.6.4",
+        "nodemon": "^2.0.22",
+        "pino-pretty": "^10.2.3",
+        "ts-node": "^10.9.1"
+    },
+    "devDependencies": {
+        "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+        "@types/node": "^20.8.10",
+        "@typescript-eslint/eslint-plugin": "^5.62.0",
+        "@typescript-eslint/parser": "^5.62.0",
+        "eslint": "^8.53.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-node": "^4.1.0",
+        "eslint-config-prettier": "^8.10.0",
+        "eslint-config-standard-with-typescript": "^34.0.1",
+        "eslint-plugin-import": "^2.29.0",
+        "eslint-plugin-n": "^15.7.0",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-promise": "^6.1.1",
+        "prettier": "^2.8.8",
+        "typescript": "^5.2.2"
+    }
+}
