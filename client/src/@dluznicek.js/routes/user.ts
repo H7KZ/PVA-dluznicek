@@ -1,5 +1,5 @@
 import type { AxiosError, AxiosResponse } from 'axios';
-import { client } from '@figurique.js/client';
+import { client } from '@dluznicek.js/client';
 
 interface Me {
 	_id: string;

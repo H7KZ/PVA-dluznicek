@@ -1,9 +1,10 @@
 {
-    "name": "@pva_dluznicek/server",
+    "name": "@dluznicek/server",
     "version": "0.0.1",
     "private": true,
     "author": "Jan Komínek",
     "keywords": [
+        "dluznicek",
         "server"
     ],
     "scripts": {

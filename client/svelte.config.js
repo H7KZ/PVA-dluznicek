@@ -15,7 +15,7 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter(),
 		alias: {
-			'@figurique.js': './src/@figurique.js/*',
+			'@dluznicek.js': './src/@dluznicek.js/*',
 			$components: './src/components/*',
 			$assets: './src/assets/*',
 			$icons: './src/icons/*',
