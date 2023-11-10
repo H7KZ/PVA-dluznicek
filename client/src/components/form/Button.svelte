@@ -4,7 +4,7 @@
 	export let label = '';
 	export let type: 'submit' | 'button' | 'reset' = 'submit';
 	export let loading = false;
-	export let color = '#EE734E';
+	export let color = '#F59E0B';
 
 	const dispatch = createEventDispatcher();
 </script>
@@ -17,11 +17,11 @@
 >
 	{label}
 	<slot />
-	<div class="flex h-5 w-6 items-center justify-center">
-		{#if loading}
+	{#if loading}
+		<div class="flex h-5 w-6 items-center justify-center">
 			<svg
 				aria-hidden="true"
-				class="inline animate-spin fill-primary-orange text-primary-gray-dark dark:text-primary-white"
+				class="inline animate-spin fill-amber-500 text-primary-gray-dark dark:text-primary-white"
 				viewBox="0 0 100 101"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
@@ -35,8 +35,8 @@
 					fill="currentFill"
 				/>
 			</svg>
-		{/if}
-	</div>
+		</div>
+	{/if}
 </button>
 
 <style scoped>

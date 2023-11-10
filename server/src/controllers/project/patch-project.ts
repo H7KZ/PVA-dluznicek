@@ -18,7 +18,7 @@ export default async function (request: FastifyRequest, reply: FastifyReply): Pr
 
     if (!project) return await reply.status(404).send({ message: Errors.project_not_found });
 
-    if (!project.userIds.includes(id) || project.ownerId !== id)
+    if (!(project.userIds.map(String).includes(id) || String(project.ownerId) === id))
         return await reply.status(403).send({ message: Errors.permission_denied });
 
     const updatedProject = await project.updateOne({ name, userIds });

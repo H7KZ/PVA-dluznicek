@@ -1,11 +1,15 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { client } from '@dluznicek.js/client';
 
-interface Project {
+export interface Project {
 	_id: string;
 	name: string;
 	userIds: string[];
 	transactionIds: string[];
+	accounts: Array<{
+		userId: string;
+		amount: number;
+	}>;
 }
 
 class ProjectsRoute {
@@ -14,9 +18,10 @@ class ProjectsRoute {
 		let project: Project | undefined;
 
 		await client.axiosInstance
-			.get(`/project/${projectId}`)
+			.get(`/projects/${projectId}`)
 			.then((s: AxiosResponse) => {
-				project = s.data.project as Project;
+				project = s.data.project.project as Project;
+				project.accounts = s.data.project.accounts;
 			})
 			.catch((e: AxiosError) => {
 				err = e;
@@ -30,7 +35,7 @@ class ProjectsRoute {
 		let project: Project | undefined;
 
 		await client.axiosInstance
-			.post('/project', { name })
+			.post('/projects', { name })
 			.then((s: AxiosResponse) => {
 				project = s.data.project as Project;
 			})
@@ -43,13 +48,19 @@ class ProjectsRoute {
 
 	public async updateProject(
 		projectId: string,
-		name: string
+		{
+			name,
+			userIds
+		}: {
+			name: string;
+			userIds: string[];
+		}
 	): Promise<{ error?: AxiosError; project?: Project }> {
 		let err: AxiosError | undefined;
 		let project: Project | undefined;
 
 		await client.axiosInstance
-			.put(`/project/${projectId}`, { name })
+			.patch(`/projects/${projectId}`, { name, userIds })
 			.then((s: AxiosResponse) => {
 				project = s.data.project as Project;
 			})
@@ -67,7 +78,7 @@ class ProjectsRoute {
 		let project: Project | undefined;
 
 		await client.axiosInstance
-			.delete(`/project/${projectId}`)
+			.delete(`/projects/${projectId}`)
 			.then((s: AxiosResponse) => {
 				project = s.data.project as Project;
 			})

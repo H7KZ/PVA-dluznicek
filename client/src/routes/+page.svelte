@@ -6,27 +6,25 @@
 
 	let form = {
 		email: '',
-		password: '',
-		name: ''
+		password: ''
 	};
 	let error = '';
 	let loading = false;
 
-	async function signUp() {
+	async function signIn() {
 		loading = true;
 
-		const { error: e, success } = await useDluznicek.auth.signUp({
+		const { error: e, success: s } = await useDluznicek.auth.signIn({
 			email: form.email,
-			password: form.password,
-			name: form.name
+			password: form.password
 		});
 
 		if (e) {
 			error = (e.response?.data as { message: string }).message || e.message;
 		}
 
-		if (success) {
-			goto('/');
+		if (s) {
+			goto('/app');
 		}
 
 		loading = false;
@@ -38,10 +36,10 @@
 		<h1
 			class="text-primary-gradient text-4xl uppercase leading-[4rem] sm:text-5xl sm:leading-[4rem]"
 		>
-			Sign up
+			Sign in
 		</h1>
 	</div>
-	<form class="flex w-full max-w-2xl flex-col gap-8" on:submit|preventDefault={signUp}>
+	<form class="flex w-full max-w-2xl flex-col gap-8" on:submit|preventDefault={signIn}>
 		<TextInput
 			label="Email"
 			placeholder="Email"
@@ -57,23 +55,14 @@
 			placeholder="Password"
 			type="password"
 			required
-			autocomplete="new-password"
+			autocomplete="current-password"
 			id="password"
 			name="password"
 			bind:value={form.password}
 		/>
-		<TextInput
-			label="Name"
-			placeholder="Name"
-			type="text"
-			required
-			autocomplete="given-name"
-			id="name"
-			name="name"
-			bind:value={form.name}
-		/>
 		<div class="flex flex-col gap-3">
-			<Button {loading}>Sign up</Button>
+			<Button {loading}>Sign in</Button>
+			<a href="/sign/up"> Sign up </a>
 		</div>
 	</form>
 	<p class="text-error-gradient h-20 text-sm">

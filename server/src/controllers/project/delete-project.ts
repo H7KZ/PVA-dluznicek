@@ -11,7 +11,7 @@ export default async function (request: FastifyRequest, reply: FastifyReply): Pr
 
     if (!project) return await reply.status(404).send({ message: Errors.project_not_found });
 
-    if (project.ownerId !== id) return await reply.status(403).send({ message: Errors.permission_denied });
+    if (String(project.ownerId) !== id) return await reply.status(403).send({ message: Errors.permission_denied });
 
     for (const userId of project.userIds) {
         const user = await UserModel.findById(userId);

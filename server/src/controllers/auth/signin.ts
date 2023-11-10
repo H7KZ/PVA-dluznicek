@@ -1,7 +1,7 @@
 import argon2 from 'argon2';
 import { type FastifyReply, type FastifyRequest } from 'fastify';
-import { ARGON2_CONFIG } from './../../config/argon2.config';
-import { JWT_TOKEN_TTL } from './../../config/global.config';
+import { ARGON2_CONFIG } from '../../config/argon2.config';
+import { JWT_TOKEN_TTL } from '../../config/global.config';
 import UserModel from './../../db/models/user.model';
 import { tokenService } from './../../services/token.service';
 import { Errors } from './../../types/error.types';

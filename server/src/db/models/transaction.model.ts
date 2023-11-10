@@ -4,10 +4,12 @@ import mongoose, { Schema, type Document } from 'mongoose';
 export interface Transaction extends Document {
     name: string;
 
-    ownerId: string;
+    projectId: Schema.Types.ObjectId;
+
+    ownerId: Schema.Types.ObjectId;
 
     users: Array<{
-        userId: string;
+        userId: Schema.Types.ObjectId;
         amount: number;
     }>;
 

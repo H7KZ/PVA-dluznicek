@@ -10,7 +10,7 @@ import { createTransactionSchema, updateTransactionSchema } from '../schemas/tra
 export default async function userRouter(fastify: FastifyInstance): Promise<void> {
     fastify.route({
         method: 'POST',
-        url: '/',
+        url: '/:projectId',
         config: {
             rateLimit: {
                 max: 500,

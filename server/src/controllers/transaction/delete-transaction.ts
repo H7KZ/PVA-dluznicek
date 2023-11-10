@@ -11,7 +11,7 @@ export default async function (request: FastifyRequest, reply: FastifyReply): Pr
 
     if (!transaction) return await reply.status(404).send({ message: Errors.transaction_not_found });
 
-    if (transaction.ownerId !== id) return await reply.status(403).send({ message: Errors.permission_denied });
+    if (String(transaction.ownerId) !== id) return await reply.status(403).send({ message: Errors.permission_denied });
 
     for (const u of transaction.users) {
         const user = await UserModel.findById(u.userId);

@@ -1,7 +1,7 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { client } from '@dluznicek.js/client';
 
-interface Me {
+export interface Me {
 	_id: string;
 	name: string;
 	email: string;
@@ -9,7 +9,7 @@ interface Me {
 	transactionIds: string[];
 }
 
-interface User {
+export interface User {
 	_id: string;
 	name: string;
 	email: string;

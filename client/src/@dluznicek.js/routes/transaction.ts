@@ -1,11 +1,15 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { client } from '@dluznicek.js/client';
 
-interface Transaction {
+export interface Transaction {
 	_id: string;
+	projectId: string;
 	name: string;
-	userIds: string[];
-	transactionIds: string[];
+	ownerId: string;
+	users: Array<{
+		userId: string;
+		amount: number;
+	}>;
 }
 
 class TransactionsRoute {
@@ -16,7 +20,7 @@ class TransactionsRoute {
 		let transaction: Transaction | undefined;
 
 		await client.axiosInstance
-			.get(`/transaction/${transactionId}`)
+			.get(`/transactions/${transactionId}`)
 			.then((s: AxiosResponse) => {
 				transaction = s.data.transaction as Transaction;
 			})
@@ -27,21 +31,24 @@ class TransactionsRoute {
 		return { error: err, transaction };
 	}
 
-	public async createTransaction({
-		name,
-		users
-	}: {
-		name: string;
-		users: Array<{
-			userId: string;
-			amount: number;
-		}>;
-	}): Promise<{ error?: AxiosError; transaction?: Transaction }> {
+	public async createTransaction(
+		projectId: string,
+		{
+			name,
+			users
+		}: {
+			name: string;
+			users: Array<{
+				userId: string;
+				amount: number;
+			}>;
+		}
+	): Promise<{ error?: AxiosError; transaction?: Transaction }> {
 		let err: AxiosError | undefined;
 		let transaction: Transaction | undefined;
 
 		await client.axiosInstance
-			.post('/transaction', { name, users })
+			.post(`/transactions/${projectId}`, { name, users })
 			.then((s: AxiosResponse) => {
 				transaction = s.data.transaction as Transaction;
 			})
@@ -60,7 +67,7 @@ class TransactionsRoute {
 		let transaction: Transaction | undefined;
 
 		await client.axiosInstance
-			.put(`/transaction/${transactionId}`, { name })
+			.put(`/transactions/${transactionId}`, { name })
 			.then((s: AxiosResponse) => {
 				transaction = s.data.transaction as Transaction;
 			})
@@ -78,7 +85,7 @@ class TransactionsRoute {
 		let transaction: Transaction | undefined;
 
 		await client.axiosInstance
-			.delete(`/transaction/${transactionId}`)
+			.delete(`/transactions/${transactionId}`)
 			.then((s: AxiosResponse) => {
 				transaction = s.data.transaction as Transaction;
 			})

@@ -1,5 +1,5 @@
 import * as jose from 'jose';
-import * as config from './../config/global.config';
+import * as config from '../config/global.config';
 
 class TokenService {
     public async create(

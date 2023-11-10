@@ -1,5 +1,5 @@
 import argon2 from 'argon2';
-import { ARGON2_CONFIG } from './../config/argon2.config';
+import { ARGON2_CONFIG } from '../config/argon2.config';
 
 class HashingService {
     public async hash(str: string): Promise<string> {
